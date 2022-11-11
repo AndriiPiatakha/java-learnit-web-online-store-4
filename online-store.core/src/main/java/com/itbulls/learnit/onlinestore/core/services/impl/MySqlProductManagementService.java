@@ -2,22 +2,23 @@ package com.itbulls.learnit.onlinestore.core.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.core.services.ProductManagementService;
 import com.itbulls.learnit.onlinestore.persistence.dao.ProductDao;
-import com.itbulls.learnit.onlinestore.persistence.dao.impl.JpaProductDao;
 import com.itbulls.learnit.onlinestore.persistence.dto.ProductDto;
 import com.itbulls.learnit.onlinestore.persistence.dto.converters.ProductDtoToProductConverter;
 import com.itbulls.learnit.onlinestore.persistence.entities.Product;
 
+@Service
 public class MySqlProductManagementService implements ProductManagementService {
 
+	@Autowired
 	private ProductDao productDao;
-	private ProductDtoToProductConverter productConverter;
 	
-	{
-		productDao = new JpaProductDao();
-		productConverter = new ProductDtoToProductConverter();
-	}
+	@Autowired
+	private ProductDtoToProductConverter productConverter;
 	
 	@Override
 	public List<Product> getProducts() {

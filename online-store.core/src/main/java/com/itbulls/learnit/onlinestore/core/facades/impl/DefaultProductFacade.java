@@ -2,25 +2,23 @@ package com.itbulls.learnit.onlinestore.core.facades.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.core.facades.ProductFacade;
 import com.itbulls.learnit.onlinestore.persistence.dao.ProductDao;
-import com.itbulls.learnit.onlinestore.persistence.dao.impl.JpaProductDao;
 import com.itbulls.learnit.onlinestore.persistence.dto.converters.ProductDtoToProductConverter;
 import com.itbulls.learnit.onlinestore.persistence.entities.Product;
 
+@Service
 public class DefaultProductFacade implements ProductFacade {
 	
-	private static DefaultProductFacade instance;
+	@Autowired
+	private ProductDao productDao;
 	
-	private ProductDao productDao = new JpaProductDao();
-	private ProductDtoToProductConverter productConverter = new ProductDtoToProductConverter();
+	@Autowired
+	private ProductDtoToProductConverter productConverter;
 
-	public static synchronized DefaultProductFacade getInstance() {
-		if (instance == null) {
-			instance = new DefaultProductFacade();
-		}
-		return instance;
-	}
 
 	@Override
 	public List<Product> getProductsLikeName(String searchQuery) {

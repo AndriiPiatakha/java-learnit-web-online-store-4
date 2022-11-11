@@ -1,23 +1,24 @@
 package com.itbulls.learnit.onlinestore.web.filters;
 
-import static com.itbulls.learnit.onlinestore.web.controllers.SignInServlet.*;
+import static com.itbulls.learnit.onlinestore.web.controllers.SignInController.*;
 import static com.itbulls.learnit.onlinestore.persistence.dto.RoleDto.*;
 
 import java.io.IOException;
 
 import com.itbulls.learnit.onlinestore.persistence.entities.User;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/admin/*")
-public class AdminFilter extends HttpFilter {
+public class AdminFilter implements Filter {
        
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		User user = (User)((HttpServletRequest)request).getSession().getAttribute(LOGGED_IN_USER_ATTR);
@@ -36,6 +37,16 @@ public class AdminFilter extends HttpFilter {
 				      + request.getServerPort()
 				      + request.getServletContext().getContextPath() + "/signin");
 		}
+		
+	}
+
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		
+	}
+
+	@Override
+	public void destroy() {
 		
 	}
 

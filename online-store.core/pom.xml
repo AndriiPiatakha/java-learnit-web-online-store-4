@@ -13,6 +13,7 @@
     <artifactId>online-store.core</artifactId>
     <version>${project.version}</version>
     <packaging>jar</packaging>
+    
 	
     <dependencies>
         <dependency>
@@ -20,6 +21,7 @@
             <artifactId>online-store.persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
     </dependencies>
 
 </project>

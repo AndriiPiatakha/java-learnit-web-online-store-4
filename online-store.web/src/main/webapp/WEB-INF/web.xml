@@ -44,17 +44,5 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 		<session-timeout>15</session-timeout>
 	</session-config>
 
-	<error-page>
-		<error-code>403</error-code>
-		<location>/error-handler</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.NullPointerException</exception-type>
-		<location>/error-handler</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/not-found</location>
-	</error-page>
 
 </web-app>

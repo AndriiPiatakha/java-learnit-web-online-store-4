@@ -1,7 +1,11 @@
 package com.itbulls.learnit.onlinestore.persistence.entities.impl;
 
 import com.itbulls.learnit.onlinestore.persistence.entities.User;
-import com.itbulls.learnit.onlinestore.persistence.utils.validation.Validate;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 
 public class DefaultUser implements User {
 	
@@ -9,16 +13,21 @@ public class DefaultUser implements User {
 	
 	private int id;
 	
-	@Validate(pattern = "[a-zA-Z]+")
+	@NotEmpty(message = "First Name should not be empty")
+	@Size(min = 3, max = 20, message = "First Name should be between 3 and 20 characters" )
 	private String firstName;
 	
-	@Validate(pattern = "[a-zA-Z]+")
+	@NotEmpty(message = "Last Name should not be empty")
+	@Size(min = 3, max = 20, message = "Last Name should be between 3 and 20 characters" )
 	private String lastName;
 	
 	private String password;
 	
-	@Validate(pattern = ".+@.+")
+	@NotEmpty(message = "Email should not be empty")
+	@Email(message = "Please, use real email")
 	private String email;
+	
+	private String repeatPassword;
 	
 	private String roleName;
 	private double money;
@@ -175,6 +184,14 @@ public class DefaultUser implements User {
 	@Override
 	public User getReferrerUser() {
 		return this.referrerUser;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
 	}
 	
 }

@@ -2,23 +2,24 @@ package com.itbulls.learnit.onlinestore.core.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.core.services.PurchaseManagementService;
 import com.itbulls.learnit.onlinestore.persistence.dao.PurchaseDao;
-import com.itbulls.learnit.onlinestore.persistence.dao.impl.JpaPurchaseDao;
 import com.itbulls.learnit.onlinestore.persistence.dto.PurchaseDto;
 import com.itbulls.learnit.onlinestore.persistence.dto.converters.PurchaseDtoToPurchaseConverter;
 import com.itbulls.learnit.onlinestore.persistence.entities.Purchase;
 
+@Service
 public class MySqlPurchaseManagementService implements PurchaseManagementService {
 	
+	@Autowired
 	private PurchaseDao purchaseDao;
+	
+	@Autowired
 	private PurchaseDtoToPurchaseConverter purchaseConverter;
 	
-	{
-		purchaseDao = new JpaPurchaseDao();
-		purchaseConverter = new PurchaseDtoToPurchaseConverter();
-	}
-
 	@Override
 	public void addPurchase(Purchase purchase) {
 		purchaseDao.savePurchase(purchaseConverter.convertPurchaseToPurchaseDto(purchase));

@@ -4,19 +4,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.persistence.dto.UserDto;
 import com.itbulls.learnit.onlinestore.persistence.entities.User;
 import com.itbulls.learnit.onlinestore.persistence.entities.impl.DefaultUser;
 
-
+@Service
 public class UserDtoToUserConverter {
 	
+	@Autowired
 	private RoleDtoToRoleConverter roleConverter;
 	
-	{
-		roleConverter = new RoleDtoToRoleConverter();
-	}
-
 	public UserDto convertUserIdToUserDtoWithOnlyId(int customerId) {
 		UserDto userDto = new UserDto();
 		userDto.setId(customerId);

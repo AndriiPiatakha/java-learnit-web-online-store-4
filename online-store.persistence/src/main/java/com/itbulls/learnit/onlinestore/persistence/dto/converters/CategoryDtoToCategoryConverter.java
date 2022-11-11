@@ -3,10 +3,13 @@ package com.itbulls.learnit.onlinestore.persistence.dto.converters;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.persistence.dto.CategoryDto;
 import com.itbulls.learnit.onlinestore.persistence.entities.Category;
 import com.itbulls.learnit.onlinestore.persistence.entities.impl.DefaultCategory;
 
+@Service
 public class CategoryDtoToCategoryConverter {
 
 	public CategoryDto convertCategoryNameToCategoryDtoWithOnlyName(String categoryName) {

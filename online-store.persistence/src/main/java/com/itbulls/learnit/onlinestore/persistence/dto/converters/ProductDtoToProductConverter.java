@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.persistence.dto.ProductDto;
 import com.itbulls.learnit.onlinestore.persistence.entities.Product;
 import com.itbulls.learnit.onlinestore.persistence.entities.impl.DefaultProduct;
 
+@Service
 public class ProductDtoToProductConverter {
 	
+	@Autowired
 	private CategoryDtoToCategoryConverter categoryConverter;
-	
-	{
-		categoryConverter = new CategoryDtoToCategoryConverter();
-	}
-	
 
 	public List<Product> convertProductDtosToProducts(List<ProductDto> productDtos) {
 		List<Product> products = new ArrayList<>();

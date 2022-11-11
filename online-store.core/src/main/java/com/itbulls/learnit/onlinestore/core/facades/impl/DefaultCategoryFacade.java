@@ -2,25 +2,23 @@ package com.itbulls.learnit.onlinestore.core.facades.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.core.facades.CategoryFacade;
 import com.itbulls.learnit.onlinestore.persistence.dao.CategoryDao;
-import com.itbulls.learnit.onlinestore.persistence.dao.impl.JpaCategoryDao;
 import com.itbulls.learnit.onlinestore.persistence.dto.converters.CategoryDtoToCategoryConverter;
 import com.itbulls.learnit.onlinestore.persistence.entities.Category;
 
+@Service
 public class DefaultCategoryFacade implements CategoryFacade {
 	
-	private static DefaultCategoryFacade instance;
+	@Autowired
+	private CategoryDao categoryDao;
 	
-	private CategoryDao categoryDao = new JpaCategoryDao();
-	private CategoryDtoToCategoryConverter categoryConverter = new CategoryDtoToCategoryConverter();
+	@Autowired
+	private CategoryDtoToCategoryConverter categoryConverter;
 
-	public static synchronized DefaultCategoryFacade getInstance() {
-		if (instance == null) {
-			instance = new DefaultCategoryFacade();
-		}
-		return instance;
-	}
 
 	@Override
 	public List<Category> getCategories() {

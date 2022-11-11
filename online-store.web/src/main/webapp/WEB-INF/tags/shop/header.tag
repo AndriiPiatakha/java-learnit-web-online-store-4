@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<fmt:setLocale value="${locale}"/>
-<fmt:setBundle basename="OnlineShopResourceBundle" var="rb"/>
 <header id="header" class="top-head">
 	<!-- Static navbar -->
 	<nav class="navbar navbar-default">
@@ -23,7 +21,7 @@
 					<form class="navbar-form navbar-left web-sh" action="search"
 						method="GET">
 						<div class="form">
-						<fmt:message key='search.placeholder' bundle='${rb}' var="searchPlaceholder"/>
+						<spring:message code='search.placeholder' var="searchPlaceholder"/>
 							<input type="text" class="form-control" name="searchQuery"
 								placeholder="${searchPlaceholder}"> 
 							<input type="hidden" name="page" value="1">
@@ -36,12 +34,12 @@
 							<div class="login-signup">
 								<ul>
 									<c:if test="${loggedInUser != null}">
-										<li><a href="my-profile"><fmt:message key="welcome.lbl" bundle="${rb}"/> ${loggedInUser.firstName}</a></li>
-										<li><a class="custom-b" href="signout"><fmt:message key="signout.btn" bundle="${rb}"/></a></li>
+										<li><a href="my-profile"><spring:message code="welcome.lbl"/> ${loggedInUser.firstName}</a></li>
+										<li><a class="custom-b" href="signout"><spring:message code="signout.btn"/></a></li>
 									</c:if>
 									<c:if test="${loggedInUser == null}">
-										<li><a href="signin"><fmt:message key="signin.btn" bundle="${rb}"/></a></li>
-										<li><a class="custom-b" href="signup"><fmt:message key="signup.btn" bundle="${rb}"/></a></li>
+										<li><a href="signin"><spring:message code="signin.btn"/></a></li>
+										<li><a class="custom-b" href="signup"><spring:message code="signup.btn"/></a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -50,20 +48,12 @@
 							<div class="help-box">
 								<ul>
 									<li><a data-toggle="modal" data-target="#myModal" href="#">
-											<span><fmt:message key="change.lang.lbl" bundle="${rb}"/> </span> 
-											<c:choose>
-												<c:when test="${locale == 'fr'}">
-													<img src="images/flag-fr.png" alt="" />
-												</c:when>
-												<c:otherwise>
-													<img src="images/flag.png" alt="" />
-												</c:otherwise>
-											</c:choose>
+											<span><spring:message code="change.lang.lbl"/> </span> 
 											
 									</a></li>
 
 									<c:if test="${not empty loggedInUser}">
-										<li><a href="my-profile"><fmt:message key="my.profile.lbl" bundle="${rb}"/></a></li>
+										<li><a href="my-profile"><spring:message code="my.profile.lbl"/></a></li>
 									</c:if>
 
 								</ul>
@@ -89,9 +79,9 @@
 			</div>
 			<div class="modal-body">
 				<ul>
-					<li><a href="change-locale"><img src="images/flag-up-1.png" alt="" />
+					<li><a href="?lang=en"><img src="images/flag-up-1.png" alt="" />
 							United States</a></li>
-					<li><a href="change-locale?locale=fr"><img src="images/flag-up-2.png" alt="" />
+					<li><a href="?lang=fr"><img src="images/flag-up-2.png" alt="" />
 							France </a></li>
 				</ul>
 			</div>

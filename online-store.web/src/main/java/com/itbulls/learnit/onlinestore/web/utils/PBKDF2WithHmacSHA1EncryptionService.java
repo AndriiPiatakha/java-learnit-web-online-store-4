@@ -8,19 +8,10 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class PBKDF2WithHmacSHA1EncryptionService {
-
-	private static PBKDF2WithHmacSHA1EncryptionService instance;
-
-	private PBKDF2WithHmacSHA1EncryptionService() {
-	}
-
-	public static synchronized PBKDF2WithHmacSHA1EncryptionService getInstance() {
-		if (instance == null) {
-			instance = new PBKDF2WithHmacSHA1EncryptionService();
-		}
-		return instance;
-	}
 
 	public String generatePasswordWithSaltAndHash(String password) {
 		int iterations = 1000;

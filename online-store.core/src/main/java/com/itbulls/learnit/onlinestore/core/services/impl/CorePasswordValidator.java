@@ -1,31 +1,23 @@
 package com.itbulls.learnit.onlinestore.core.services.impl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import org.springframework.stereotype.Service;
 
 import com.itbulls.learnit.onlinestore.core.services.Validator;
 
-public class PasswordValidator implements Validator {
+@Service
+public class CorePasswordValidator implements Validator {
 
 	private static final String NULL_PASSWORD_VALUE_ERROR = "NULL password value";
 	public static final String MOST_COMMON_PASSWORD = "Most common password";
 	public static final String LENGTH_OR_SPECIAL_CHARACTER_ERROR = "Invalid max length or absence of special characters";
 	private static final String COMMON_PASSWORDS_FILE_NAME = "10000_common_passwords.txt";
-	private static PasswordValidator instance;
 
 	/**
 	 * @return true in case password has 8 or more characters and at least one
@@ -46,13 +38,6 @@ public class PasswordValidator implements Validator {
 		}
 
 		return false;
-	}
-
-	public static synchronized PasswordValidator getInstance() {
-		if (instance == null) {
-			instance = new PasswordValidator();
-		}
-		return instance;
 	}
 
 	@Override

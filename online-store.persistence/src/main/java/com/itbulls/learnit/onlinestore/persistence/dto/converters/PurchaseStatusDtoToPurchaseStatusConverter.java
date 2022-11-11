@@ -1,9 +1,12 @@
 package com.itbulls.learnit.onlinestore.persistence.dto.converters;
 
+import org.springframework.stereotype.Service;
+
 import com.itbulls.learnit.onlinestore.persistence.dto.PurchaseStatusDto;
 import com.itbulls.learnit.onlinestore.persistence.entities.PurchaseStatus;
 import com.itbulls.learnit.onlinestore.persistence.entities.impl.DefaultPurchaseStatus;
 
+@Service
 public class PurchaseStatusDtoToPurchaseStatusConverter {
 
 	public PurchaseStatus convertPurchaseStatusDtoToPurchaseStatus(PurchaseStatusDto purchaseStatusDto) {
