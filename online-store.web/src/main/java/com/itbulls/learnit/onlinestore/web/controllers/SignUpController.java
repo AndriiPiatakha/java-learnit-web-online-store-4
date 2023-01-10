@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,13 +63,13 @@ public class SignUpController {
 		User userByEmail = userFacade.getUserByEmail(user.getEmail());
 		
 		if (userByEmail != null) {
-			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.email.exists", null, Locale.getDefault()));
+			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.email.exists", null, LocaleContextHolder.getLocale()));
 			LOGGER.warn("Registration is failed. User with such email {} already exists", user.getEmail());
 			return "redirect:/signup";
 		}
 		
 		if (!notEncryptedPassword.equals(user.getRepeatPassword())) {
-			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.repeat.password", null, Locale.getDefault()));
+			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.repeat.password", null, LocaleContextHolder.getLocale()));
 			LOGGER.warn("Registration is failed. Repeat password is not correct");
 			return "redirect:/signup";
 		}
@@ -81,13 +82,13 @@ public class SignUpController {
 		
 		List<String> errorMessages = passValidator.validate(notEncryptedPassword);
 		if (errorMessages.size() != 0) {
-			String errMsg = messageSource.getMessage("signup.err.msg.general.error", null, Locale.getDefault());
+			String errMsg = messageSource.getMessage("signup.err.msg.general.error", null, LocaleContextHolder.getLocale());
 			if (errorMessages.contains(CorePasswordValidator.LENGTH_OR_SPECIAL_CHARACTER_ERROR)) {
-				errMsg = messageSource.getMessage("signup.err.msg.special.character", null, Locale.getDefault());
+				errMsg = messageSource.getMessage("signup.err.msg.special.character", null, LocaleContextHolder.getLocale());
 				LOGGER.warn("Registration is failed. Password shorter than 8 characters or doesn't contain a special character.");
 			}
 			if (errorMessages.contains(CorePasswordValidator.MOST_COMMON_PASSWORD)) {
-				errMsg = messageSource.getMessage("signup.err.msg.common.password", null, Locale.getDefault());
+				errMsg = messageSource.getMessage("signup.err.msg.common.password", null, LocaleContextHolder.getLocale());
 				LOGGER.warn("Registration is failed. User selected one of the most common passwords.");
 			}
 			session.setAttribute("errMsg", errMsg);

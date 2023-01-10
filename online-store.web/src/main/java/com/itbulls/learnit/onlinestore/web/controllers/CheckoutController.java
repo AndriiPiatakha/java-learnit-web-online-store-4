@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +34,7 @@ public class CheckoutController {
 				(User) session.getAttribute(SignInController.LOGGED_IN_USER_ATTR),
 				productFacade.getProductByGuid(productGuid));
 
-		session.setAttribute("orderStatus", messageSource.getMessage("order.created.msg", null, Locale.getDefault()));
+		session.setAttribute("orderStatus", messageSource.getMessage("order.created.msg", null, LocaleContextHolder.getLocale()));
 		return "redirect:/product?guid=" + productGuid;
 	}
 

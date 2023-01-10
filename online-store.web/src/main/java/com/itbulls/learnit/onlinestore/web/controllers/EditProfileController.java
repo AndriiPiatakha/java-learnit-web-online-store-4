@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,24 +63,24 @@ public class EditProfileController {
 		User userByEmail = userFacade.getUserByEmail(user.getEmail());
 		
 		if (userByEmail != null && !emailParameter.equals(loggedInUser.getEmail())) {
-			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.email.exists", null, Locale.getDefault()));
+			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.email.exists", null, LocaleContextHolder.getLocale()));
 			return "redirect:/edit-profile";
 		}
 		
 		if (!encryptionService.validatePassword(password, loggedInUser.getPassword())) {
-			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.old.password.wrong", null, Locale.getDefault()));
+			session.setAttribute("errMsg", messageSource.getMessage("signup.err.msg.old.password.wrong", null, LocaleContextHolder.getLocale()));
 			return "redirect:/edit-profile";
 		}
 		
 		if (newPasswordParameter != null && !newPasswordParameter.isEmpty()) {
 			List<String> errorMessages = passValidator.validate(newPasswordParameter);
 			if (errorMessages.size() != 0) {
-				String errMsg = messageSource.getMessage("signup.err.msg.general.error", null, Locale.getDefault());
+				String errMsg = messageSource.getMessage("signup.err.msg.general.error", null, LocaleContextHolder.getLocale());
 				if (errorMessages.contains(CorePasswordValidator.LENGTH_OR_SPECIAL_CHARACTER_ERROR)) {
-					errMsg = messageSource.getMessage("signup.err.msg.special.character", null, Locale.getDefault());
+					errMsg = messageSource.getMessage("signup.err.msg.special.character", null, LocaleContextHolder.getLocale());
 				}
 				if (errorMessages.contains(CorePasswordValidator.MOST_COMMON_PASSWORD)) {
-					errMsg = messageSource.getMessage("signup.err.msg.common.password", null, Locale.getDefault());
+					errMsg = messageSource.getMessage("signup.err.msg.common.password", null, LocaleContextHolder.getLocale());
 				}
 				session.setAttribute("errMsg", errMsg);
 				return "redirect:/edit-profile";
